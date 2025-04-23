@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-    
     <link rel="stylesheet" href="style.css">
     <title>ELITE BOOK</title>
 </head>
@@ -18,7 +17,7 @@
         <h1>ELITE</h1>
         <input type="number" placeholder="buscarprodutos">
         <div class="menu">
-            <a href="">Home</a>
+            <a href="index.html">Home</a>
             <a href="">produtos</a>
             <a href="">categorias</a>
     </header>
@@ -34,105 +33,278 @@
         <tbody>
             <tr>
                 <td><img class="checkout" src="livro 1.webp" alt=""></td>
-                <td>Cerveja</td>
+                <td>livro</td>
                 <td>
                     <input class="form-control checkout" type="number" value="4">
                 </td>
             </tr>
             <tr>
                 <td><img class="checkout" src="livro 1.webp" alt=""></td>
-                <td>Cerveja</td>
+                <td>livro</td>
                 <td>
                     <input class="form-control checkout" type="number" value="4">
                 </td>
             </tr>
             <tr>
                 <td><img class="checkout" src="livro 1.webp" alt=""></td>
-                <td>Cerveja</td>
+                <td>livro</td>
                 <td><input class="form-control checkout" type="number" value="4"></td>
             </tr>
         </tbody>
     </table>
 </div>
+
 <div class="container">
     <div class="container">
         <div class="row">
           <div class="col">
             <h1>ENDEREÇO</h1>
-            <form>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">CEP</label>
-                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">UF</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  </div>
-                <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label">RUA</label>
-                  <input type="text" class="form-control" id="exampleInputPassword1">
-                </div>        <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">N °</label>
-                    <input type="number" class="form-control" id="exampleInputPassword1">
-                  </div>        
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">NOME COMPLETO</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1">
-                  </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
+<form>
+  <div class="mb-3">
+    <label for="cep" class="form-label">CEP</label>
+    <input
+      type="text"
+      class="form-control"
+      id="cep"
+      name="cep"
+      maxlength="8"
+      placeholder="Ex: 01001000"
+      inputmode="numeric"
+      required
+    >
+  </div>
+
+  <div class="mb-3">
+    <label for="uf" class="form-label">UF</label>
+    <input
+      type="text"
+      class="form-control"
+      id="uf"
+      name="uf"
+      maxlength="2"
+      placeholder="Ex: SP"
+      required
+      readonly
+    >
+  </div>
+
+  <div class="mb-3">
+    <label for="rua" class="form-label">Rua</label>
+    <input
+      type="text"
+      class="form-control"
+      id="rua"
+      name="rua"
+      required
+      readonly
+    >
+  </div>
+
+  <div class="mb-3">
+    <label for="numero" class="form-label">Nº</label>
+    <input
+      type="number"
+      class="form-control"
+      id="numero"
+      name="numero"
+      required
+    >
+  </div>
+
+  <div class="mb-3">
+    <label for="nomeCompleto" class="form-label">Nome Completo</label>
+    <input
+      type="text"
+      class="form-control"
+      id="nomeCompleto"
+      name="nomeCompleto"
+      required
+    >
+  </div>
+
+  <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+
+<script>
+  // Função para buscar o endereço via CEP
+  document.getElementById('cep').addEventListener('input', function () {
+    const cep = this.value.replace(/\D/g, ''); // Remove qualquer caractere não numérico
+
+    if (cep.length === 8) { // Verifica se o CEP tem 8 caracteres
+      fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then(response => response.json())
+        .then(data => {
+          if (!data.erro) {
+            document.getElementById('rua').value = data.logradouro;
+            document.getElementById('uf').value = data.uf;
+          } else {
+            alert('CEP não encontrado');
+          }
+        })
+        .catch(error => {
+          alert('Erro ao buscar o CEP');
+          console.error(error);
+        });
+    }
+  });
+</script>
+
           </div>
           <div class="col">
             <H1>CARTÃO</H1>
             <form>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">NUMERO DO CARTÃO</label>
-                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">NOME APELIDO</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  </div>
-                <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label">VENCIMENTO</label>
-                  <input type="date" class="form-control" id="exampleInputPassword1">
-                </div>        
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">N °</label>
-                    <input type="number" class="form-control" id="exampleInputPassword1">
-                  </div>        
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">CVV</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1">
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">PARCELAS</label>
-                    <select class="form-select form-select-lg mb-3" aria-label="Large select example">
-                        <option selected>Selecione parcelas</option>
-                        <option value="1">1 - sem juros</option>
-                        <option value="2">2 - sem juros</option>
-                        <option value="3">3 - sem juros</option>
-                        <option value="3">4 - com juros</option>
-                        <option value="3">5 - com juros</option>
-                        <option value="3">6 - com juros</option>
-                        <option value="3">7 - com juros</option>
-                        <option value="3">8 - com juros</option>
-                        <option value="3">9 - com juros</option>
-                        <option value="3">10 - com juros</option>
-                        <option value="3">11 - com juros</option>
-                        <option value="3">12 - com juros</option>
-                      </select>
-                    
+<!-- FORMULÁRIO DE CARTÃO DE CRÉDITO -->
 
-                  </div>
+<div class="mb-3">
+  <label for="cardNumber" class="form-label">Número do Cartão</label>
+  <input
+    type="text"
+    class="form-control"
+    id="cardNumber"
+    name="cardNumber"
+    maxlength="19"
+    pattern="\d{16}"
+    placeholder="1234 5678 9012 3456"
+    inputmode="numeric"
+    required
+  >
+</div>
+
+<div class="mb-3">
+  <label for="cardName" class="form-label">Nome / Apelido</label>
+  <input
+    type="text"
+    class="form-control"
+    id="cardName"
+    name="cardName"
+    placeholder="Nome como está no cartão"
+    required
+  >
+</div>
+
+<div class="mb-3">
+  <label for="expiryDate" class="form-label">Vencimento</label>
+  <input
+    type="month"
+    class="form-control"
+    id="expiryDate"
+    name="expiryDate"
+    min="2024-04"
+    required
+  >
+</div>
+
+<div class="mb-3">
+  <label for="cardHolderNumber" class="form-label">Número do titular</label>
+  <input
+    type="number"
+    class="form-control"
+    id="cardHolderNumber"
+    name="cardHolderNumber"
+    placeholder="Ex: CPF ou identificação"
+    required
+  >
+</div>
+
+<div class="mb-3">
+  <label for="cvv" class="form-label">CVV</label>
+  <input
+    type="password"
+    maxlength="4"
+    class="form-control"
+    id="cvv"
+    name="cvv"
+    placeholder="Código de segurança"
+    pattern="\d{3,4}"
+    inputmode="numeric"
+    required
+  >
+</div>
+
+
+<!-- Aqui mostraremos o valor da parcela -->
+<div id="parcelasInfo" class="alert alert-info d-none"></div>
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
-          </div>
-
+            </div>
+            <div class="mb-3">
+              <label for="purchaseValue" class="form-label">Valor da Compra (R$)</label>
+              <input
+                type="number"
+                class="form-control"
+                id="purchaseValue"
+                name="purchaseValue"
+                placeholder="Ex: 1200"
+                min="1"
+                required
+              >
+            </div>
+            
+            <div class="mb-3">
+              <label for="installments" class="form-label">Parcelas</label>
+              <select class="form-select form-select-lg mb-3" id="installments" name="installments" required>
+                <option value="" selected disabled>Selecione parcelas</option>
+                <option value="1" data-juros="0">1x - sem juros</option>
+                <option value="2" data-juros="0">2x - sem juros</option>
+                <option value="3" data-juros="0">3x - sem juros</option>
+                <option value="4" data-juros="2">4x - com juros</option>
+                <option value="5" data-juros="2">5x - com juros</option>
+                <option value="6" data-juros="2">6x - com juros</option>
+                <option value="7" data-juros="2">7x - com juros</option>
+                <option value="8" data-juros="2">8x - com juros</option>
+                <option value="9" data-juros="2">9x - com juros</option>
+                <option value="10" data-juros="2">10x - com juros</option>
+                <option value="11" data-juros="2">11x - com juros</option>
+                <option value="12" data-juros="2">12x - com juros</option>
+              </select>
+            </div>
+            
+            <!-- Resultado do cálculo -->
+            <div id="parcelasInfo" class="alert alert-info d-none"></div>
+            <script>
+              const valorInput = document.getElementById('purchaseValue');
+              const selectParcelas = document.getElementById('installments');
+              const infoDiv = document.getElementById('parcelasInfo');
+            
+              function calcularParcelas() {
+                const valorCompra = parseFloat(valorInput.value);
+                const parcelas = parseInt(selectParcelas.value);
+                const juros = parseFloat(selectParcelas.options[selectParcelas.selectedIndex].getAttribute('data-juros'));
+            
+                if (isNaN(valorCompra) || valorCompra <= 0 || isNaN(parcelas)) {
+                  infoDiv.classList.add('d-none');
+                  return;
+                }
+            
+                let valorFinal = valorCompra;
+                let valorParcela = 0;
+            
+                if (juros > 0) {
+                  const taxaMensal = juros / 100;
+                  valorFinal = valorCompra * Math.pow(1 + taxaMensal, parcelas);
+                  valorParcela = valorFinal / parcelas;
+                  infoDiv.innerHTML = `
+                    Valor total com juros: <strong>R$ ${valorFinal.toFixed(2)}</strong><br>
+                    ${parcelas}x de <strong>R$ ${valorParcela.toFixed(2)}</strong> com ${juros}% a.m.
+                  `;
+                } else {
+                  valorParcela = valorCompra / parcelas;
+                  infoDiv.innerHTML = `
+                    ${parcelas}x de <strong>R$ ${valorParcela.toFixed(2)}</strong> sem juros
+                  `;
+                }
+            
+                infoDiv.classList.remove('d-none');
+              }
+            
+              // Event listeners
+              valorInput.addEventListener('input', calcularParcelas);
+              selectParcelas.addEventListener('change', calcularParcelas);
+            </script>   
 
     <footer>
         <p>Lorem, i dolore blanditiis? Porro, doloribus necessitatibus.</p>
     </footer>
 </body>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </html>
